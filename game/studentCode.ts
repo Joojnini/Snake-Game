@@ -27,7 +27,8 @@ export class BoardHelper implements IBoardHelper {
      * @returns the new cell item
      */
     createApple(freeCells: Coordinate[]): CellItem {
-        return new CellItem(new Coordinate(0, 0), 'red');
+        let index = Math.floor(Math.random() * freeCells.length) + 1;
+        return new CellItem(freeCells[index], 'red');
     }
 
     /**
@@ -36,6 +37,20 @@ export class BoardHelper implements IBoardHelper {
      * @returns the associated direction, or null if not an accepted key code
      */
     getDirection(keyBoardEvent: KeyboardEvent): Direction | null {
+        switch (keyBoardEvent.code) {
+            case 'KeyW':
+                return Direction.UP;
+                break;
+            case 'KeyA':
+                return Direction.LEFT;
+                break;
+            case 'KeyS':
+                return Direction.DOWN;
+                break;
+            case 'KeyD':
+                return Direction.RIGHT;
+                break;
+        }
         return null;
     }
 }
@@ -88,7 +103,7 @@ export class Snake implements ISnake {
      * Handles the consumption of an apple, which should add a new body part
      */
     consumeApple(): void {
-        
+
     }
 
     /**
